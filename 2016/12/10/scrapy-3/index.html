@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          scrapy-3 - IFZ的博客 | IFZ&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://if-zz.github.io/2016/12/10/scrapy-3/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">IFZ&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://if-zz.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#学习" title="学习">学习</a>
+                        
+                          <a class="tag" href="/tags/#scrapy" title="scrapy">scrapy</a>
+                        
+                    </div>
+                    <h1>scrapy-3</h1>
+                    <h2 class="subheading">my Scrapy</h2>
+                    <span class="meta">
+                        Posted by if Zeng on
+                        2016-12-10
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>#DC Spider<br>因为要完成一个对于利用机器学习对帖子内容经行二分类的任务（积极和消极情绪），所以需要写一个能够爬取帖子的爬虫。</p>
+<p>将爬取的目标定为<a href="http://mycd.qq.com" target="_blank" rel="external">大成网论坛</a></p>
+<p>首先，当然还是建立一个爬虫项目<br><code>scrapy startproject DCSpider</code></p>
+<p>然后，思考一下需要爬取的内容，发现是帖子链接，帖子标题，帖子内容以及评论。所以首先在 <strong>items.py</strong> 中定义好。<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">name</span> = scrapy.Field()</div><div class="line"><span class="attr">description</span> = scrapy.Field()</div><div class="line"><span class="attr">url</span> = scrapy.Field()</div></pre></td></tr></table></figure></p>
+<p>然后就是我们的重头戏，爬虫部分了</p>
+<p>首先别忘了定义我们爬虫的名字<code>name=&#39;dcw&#39;</code></p>
+<p>我主要想爬取的是论坛中大成居委会板块的帖子，因为内容比较丰富，在后面的分析中也比较有价值。所以就去设置 <strong>start_urls</strong> 为该板块的第一页<br><code>start_urls=[&quot;http://mycd.qq.com/f-1001252491-1.htm&quot;,]</code></p>
+<p>接下来就是定义 <strong>parse</strong> 函数了,它决定了咱们的爬虫能否完成自己的使命。因为我们需要获得帖子的内容，所以先要获取一个当页所有帖子的url。通过查看网页源码可以看到帖子的url的存放位置。<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">sel</span> = Selector(response)</div><div class="line"><span class="attr">article_url</span> = sel.xpath(<span class="string">'//th/a[@href != "javascript:;"]/@href'</span>).extract()</div></pre></td></tr></table></figure></p>
+<p>因为要处理每一个帖子的内容，所以这里新定义了 <strong>parse_item(self,response)</strong> 来进行处理.使用每一个帖子的url形成Request请求来调用它，具体代码为:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">item = DcspiderItem()</div><div class="line"><span class="keyword">for</span> url <span class="keyword">in</span> <span class="symbol">article_url:</span></div><div class="line">           urll = urljoin(<span class="keyword">self</span>.base_url, url)</div><div class="line">           <span class="comment"># 调用parse_item解析文章内容</span></div><div class="line">           request = scrapy.Request(urll, callback=<span class="keyword">self</span>.parse_item)</div><div class="line">           request.meta[<span class="string">'item'</span>] = item</div><div class="line">           <span class="keyword">yield</span> request</div></pre></td></tr></table></figure></p>
+<p>因为爬取到的url为相对地址，所以这里添加了一个 <strong>base_url</strong> 来作为填充部分<br><code>base_url=&#39;http://mycd.qq.com&#39;</code></p>
+<p>然后开始对 <strong>parse_item</strong> 的定义，再回想一下我们的需求-&gt;url,title,description，url可以直接从<code>response.url</code>得到，所以需要定义规则从网页源码中得到的就是title和description。<br>首先是title,这个很容易的就可以得到为<code>article_name=sel.xpath(&#39;//h1/a[@id=&quot;thread_subject&quot;]/text()&#39;).extract()</code><br>接下来就是帖子内容和评论了，我发现正文和评论的区别只在于其中一个div标签中的id属性值不同，所以先将这之前的内容经过xpath处理得到一个Selector,然后通过for循环处理分别得到正文和评论。从这里起，我就开始不断踩坑了…<br>1.第一个坑，是我怎么也抓取不到内容，我一直以为是自己的xpath规则定义错误，可是我反复确定自己没有打错任何一个字母，后来经过搜索得知，是浏览器自动添加了一个tbody标签，而这个标签是网页源码中实际并不存在的，scrapy并不能处理它，而解决办法也很简单，在xpath总去掉该标签就好了…<br>2.第二个坑，在于有的帖子正文和评论内容抓取下来的都是些无意义的空格和换行符，查看源码后得知是它们自己设置了字体和一些格式，导致源码中原文字内容的部分增加了相应的标签…这一部分就真的很难完全处理了，因为这些标签的增加完全取决于用户对文字内容进行了何种处理，没有规律可言，所以我只是在xpath中匹配了几种常见的规则。<br>3.对于爬取到的内容的处理.鉴于上述第二条的原因，爬取到的内容常常分为多个部分，所以需要合并；常常夹带空格，<strong>\r\n</strong> 样式的换行符，所以需要去掉，常常因为帖子只有图片无文字或因格式而爬取失败所以需要存储时以标题代替内容…此处处理过程的心累难以描述…<br><strong>parse_item</strong> 的具体实现：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_item</span><span class="params">(self,response)</span>:</span></div><div class="line">    <span class="comment">#还存在有一条帖子有多页回复的情况，此处暂不处理</span></div><div class="line">    content = <span class="string">u''</span></div><div class="line">    sel = Selector(response)</div><div class="line">    item = response.meta[<span class="string">'item'</span>]</div><div class="line">    l = ItemLoader(item=DcspiderItem(), response=response)</div><div class="line">    article_url=str(response.url)</div><div class="line">    article_name=sel.xpath(<span class="string">'//h1/a[@id="thread_subject"]/text()'</span>).extract()</div><div class="line">    article_description=sel.xpath(<span class="string">'//div[@class="wp cl mtl"]/div[@class="w865 z"]/div[@id="postlist"]'</span></div><div class="line">                                  <span class="string">'//div[@id != "postlistreply"]'</span>)</div><div class="line">                                  <span class="comment"># '/table[@class="plhin"]'</span></div><div class="line">                                  <span class="comment"># '/tr'</span></div><div class="line">                                  <span class="comment"># '/td[not(@class)]'</span></div><div class="line">                                  <span class="comment"># '/div[@class="pct ptm"]/'</span></div><div class="line">                                  <span class="comment"># 'div/div[@class="t_fsz"]/table/tr/td[@class="t_f"]/text()'</span></div><div class="line">                                  <span class="comment"># ).extract()</span></div><div class="line">    <span class="comment">#经观察，每篇的帖子的第一部分第一部分div为正文，此后为评论</span></div><div class="line">    description=[]</div><div class="line">    <span class="keyword">for</span> des <span class="keyword">in</span> article_description:</div><div class="line">        post_article = des.xpath(<span class="string">'table[@class="plhin"]/tr/td[not(@class)]/div[@class="pct ptm"]/'</span></div><div class="line">                                  <span class="string">'div/div[@class="t_fsz"]/table/tr/td[@class="t_f"]/text()|'</span></div><div class="line">                                <span class="string">'table[@class="plhin"]/tr/td[not(@class)]/div[@class="pct ptm"]/'</span></div><div class="line">                                  <span class="string">'div/div[@class="t_fsz"]/table/tr/td[@class="t_f"]/font/font/text()|'</span></div><div class="line">                                <span class="string">'table[@class="plhin"]/tr/td[not(@class)]/div[@class="pct ptm"]/'</span></div><div class="line">                                  <span class="string">'div/div[@class="t_fsz"]/table/tr/td[@class="t_f"]/div/text()|'</span></div><div class="line">                                <span class="string">'table[@class="plhin"]/tr/td[not(@class)]/div[@class="pct ptm"]/'</span></div><div class="line">                                  <span class="string">'div/div[@class="t_fsz"]/table/tr/td[@class="t_f"]/div/font/text()|'</span></div><div class="line">                                <span class="string">'table[@class="plhin"]/tr/td[not(@class)]/div[@class="pct ptm"]/'</span></div><div class="line">                                  <span class="string">'div/div[@class="t_fsz"]/table/tr/td[@class="t_f"]/font/font/font/text()|'</span></div><div class="line">                                <span class="string">'table[@class="plhin"]/tr/td[not(@class)]/div[@class="pct ptm"]/'</span></div><div class="line">                                  <span class="string">'div/div[@class="t_fsz"]/table/tr/td[@class="t_f"]/font/font/font/font/text()'</span></div><div class="line">                                ).extract()</div><div class="line"></div><div class="line">        <span class="keyword">for</span> article <span class="keyword">in</span> post_article:</div><div class="line">            content=content+article</div><div class="line">        <span class="keyword">if</span> content == <span class="string">''</span><span class="keyword">or</span> content == <span class="string">'\r\n'</span><span class="keyword">or</span> content==<span class="string">'\r\n\r\n'</span>:<span class="keyword">pass</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            content=content.replace(<span class="string">u'\r'</span>,<span class="string">''</span>).replace(<span class="string">u'\n'</span>,<span class="string">''</span>).replace(<span class="string">u' '</span>,<span class="string">''</span>)</div><div class="line">            content=re.sub(<span class="string">u'[\u3000,\xa0]'</span>,<span class="string">u''</span>,content)</div><div class="line">            description.append(content)</div><div class="line">        content=<span class="string">u''</span></div><div class="line">    article_name[<span class="number">0</span>] = re.sub(<span class="string">u'[\u3000,\xa0]'</span>,<span class="string">u''</span>,article_name[<span class="number">0</span>])</div><div class="line">    article_name=article_name[<span class="number">0</span>].replace(<span class="string">u' '</span>,<span class="string">''</span>)</div><div class="line">    article_url = article_url</div><div class="line">    article_description = description</div><div class="line">    <span class="keyword">print</span> article_name, article_url</div><div class="line">    l.add_value(<span class="string">'name'</span>, article_name)</div><div class="line">    l.add_value(<span class="string">'url'</span>, article_url)</div><div class="line">    l.add_value(<span class="string">'description'</span>, article_description)</div><div class="line">    <span class="keyword">yield</span> l.load_item()</div></pre></td></tr></table></figure></p>
+<p>一页的帖子处理完了，现在需要能跳到下一页，这时就需要去找到并判断是否还有下一页的链接<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> nxtpage_url = sel.xpath('//<span class="keyword">div</span>[@class=<span class="string">"page_box y"</span>]/<span class="keyword">div</span>/a[@class=<span class="string">"nxt"</span>]/@href').extract()</div><div class="line"> <span class="keyword">try</span>:</div><div class="line">    <span class="keyword">if</span> nxtpage_url[<span class="number">0</span>]:</div><div class="line">        request = scrapy.<span class="type">Request</span>(urljoin(self.base_url, nxtpage_url[<span class="number">0</span>]), callback=self.parse)</div><div class="line">        <span class="keyword">yield</span> request</div><div class="line"><span class="keyword">except</span>:</div><div class="line">    pass</div></pre></td></tr></table></figure></p>
+<p>到此，爬虫部分就结束了，现在就需要将爬到的我们需要的内容存储下来方便使用，这里我是存储于txt格式的文档中<br>在pipelines.py中定义存储规则<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class DcspiderPipeline(object):</div><div class="line">    def __init__(self):</div><div class="line">        self.<span class="built_in">file</span> = codecs.<span class="built_in">open</span>(<span class="string">'items.txt'</span>, <span class="string">'w'</span>, encoding=<span class="string">'utf-8'</span>)</div><div class="line"></div><div class="line">    def process_item(self, <span class="keyword">item</span>, spider):</div><div class="line">        <span class="keyword">if</span> <span class="keyword">item</span>[<span class="string">"description"</span>][<span class="number">0</span>] != <span class="string">''</span>:</div><div class="line">            <span class="built_in">line</span> = <span class="keyword">item</span>[<span class="string">"url"</span>][<span class="number">0</span>] + <span class="string">' '</span> + <span class="keyword">item</span>[<span class="string">"name"</span>][<span class="number">0</span>] + <span class="string">' '</span> + <span class="keyword">item</span>[<span class="string">"description"</span>][<span class="number">0</span>] + <span class="string">"\n"</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="built_in">line</span>=  <span class="keyword">item</span>[<span class="string">"url"</span>][<span class="number">0</span>] + <span class="string">' '</span> + <span class="keyword">item</span>[<span class="string">"name"</span>][<span class="number">0</span>] + <span class="string">' '</span> + <span class="keyword">item</span>[<span class="string">"name"</span>][<span class="number">0</span>] + <span class="string">"\n"</span></div><div class="line">        self.<span class="built_in">file</span>.<span class="built_in">write</span>(<span class="built_in">line</span>)</div><div class="line">        <span class="literal">return</span> <span class="keyword">item</span></div><div class="line"></div><div class="line">    def spider_closed(self, spider):</div><div class="line">        self.<span class="built_in">file</span>.<span class="built_in">close</span>()</div></pre></td></tr></table></figure></p>
+<p>这里我为了简单，忽略了帖子评论部分</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/11/30/scrapy-2/" data-toggle="tooltip" data-placement="top" title="scrapy-2">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#学习" title="学习">学习</a>
+                        
+                          <a class="tag" href="/tags/#scrapy" title="scrapy">scrapy</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://duyiqi17.github.io" target="_blank">17 Space</a></li>
+                    
+                        <li><a href="http://weiaohan.top" target="_blank">Wei Aohan&#39;s Blog</a></li>
+                    
+                        <li><a href="https://uestc-lxy.github.io" target="_blank">UESTC-LXY</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://if-zz.github.io/2016/12/10/scrapy-3/";
+    var disqus_url = "https://if-zz.github.io/2016/12/10/scrapy-3/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/if-zeng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/if Zeng.cn">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/if-zz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; IFZ&#39;s Blog 2016 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://if-zz.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'huangxuan.me';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://if-zz.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
