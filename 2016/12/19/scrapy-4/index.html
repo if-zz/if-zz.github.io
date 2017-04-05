@@ -13,11 +13,11 @@
 
     <title>
         
-          IFZ的博客 | IFZ&#39;s Blog
+          scrapy-4 - IFZ的博客 | IFZ&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://if-zz.github.io/i_dont_wanna_use_default_archives/2016/11/">
+    <link rel="canonical" href="https://if-zz.github.io/2016/12/19/scrapy-4/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,7 +147,194 @@
 
 
     <!-- Main Content -->
-    <!-- Default Archive layout, we use archives instead. -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://if-zz.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/zif-z.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#scrapy" title="scrapy">scrapy</a>
+                        
+                          <a class="tag" href="/tags/#项目" title="项目">项目</a>
+                        
+                    </div>
+                    <h1>scrapy-4</h1>
+                    <h2 class="subheading">tySpider</h2>
+                    <span class="meta">
+                        Posted by if Zeng on
+                        2016-12-19
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="一个好像大了点的爬虫项目"><a href="#一个好像大了点的爬虫项目" class="headerlink" title="一个好像大了点的爬虫项目"></a>一个好像大了点的爬虫项目</h1><p>似乎又有一段时间没写过东西，主要是最近在做一个项目中的爬虫部分，应为之前恰好在看scrapy框架，所以这次也就钦定它了。<br>之前曾经写过一个关于用scrapy框架进行爬取帖子的<a href="scrapy-3">小爬虫</a>，所以这里就对之前写过的部分不再赘述了，这里我主要想说的是关于这次项目中的爬虫中的一些新东西。<br>这次的爬虫中，我们把要爬的目标选定为<a href="bbs.tianya.cn">天涯论坛</a>，同时将要爬取的内容限定在“我要发帖”类型的帖子中，因为之前经过考察，发现还有像“我要提问”这样的帖子，他们的网页布局是不同的，所以为了方便，我们在这里就先限定一下，简单一些。<br>因为在之前的试水中，我们放弃了对于帖子的其他基本信息，回复以及评论的爬取，所以今天我们就来把这些部分搞定。</p>
+<h2 id="爬取一个帖子的基本信息"><a href="#爬取一个帖子的基本信息" class="headerlink" title="爬取一个帖子的基本信息"></a>爬取一个帖子的基本信息</h2><p>之前我们只对帖子的url，标题，文章内容进行了爬取。今天，我打算把</p>
+<ul>
+<li>帖子标题</li>
+<li>帖子url</li>
+<li>帖子作者ID</li>
+<li>帖子作者</li>
+<li>帖子发布时间</li>
+<li>帖子正文</li>
+<li>回帖数</li>
+<li>浏览量</li>
+<li>最后回帖时间<br>都爬取下来，以上部分没什么难度，只是项目要求的内容。只需要把分析网页结构把各个部分的xpath找好就行了。</li>
+</ul>
+<h2 id="爬取帖子的回复部分"><a href="#爬取帖子的回复部分" class="headerlink" title="爬取帖子的回复部分"></a>爬取帖子的回复部分</h2><p>接下来就是关于上一次被我忽略的部分，关于对回复以及二级评论的爬取<br>————————————————————————————这是已经两个月之后的分割线————————————————————————————————<br>我就简单阐述一下原理吧：<br>对每条帖子进行是否还有下一页的检测，来爬取全部内容（包括回复和评论）；对于更新的处理，打算将爬虫设置为每隔一段时间自动执行（sleep函数），并且在每次执行时记录下当前最新帖子的时间，在下一次执行爬虫时，将帖子的发布时间与记录的时间进行对比，只爬取更新时间在记录时间后的帖子，同时记录下新的最新时间；针对明确对帖子的回复和对回复的评论的关系，建立一个存储帖子回复的list，然后再建立一个存储评论的list，该list中的每一项都是一个list来对应每一条回复的所有评论。<br>最后将所有数据存入数据库中<br>具体代码请访问<a href="https://github.com/if-zz/tySpider" target="_blank" rel="external">github</a></p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/12/10/scrapy-3/" data-toggle="tooltip" data-placement="top" title="scrapy-3">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#scrapy" title="scrapy">scrapy</a>
+                        
+                          <a class="tag" href="/tags/#项目" title="项目">项目</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://duyiqi17.github.io" target="_blank">17 Space</a></li>
+                    
+                        <li><a href="http://weiaohan.top" target="_blank">Wei Aohan&#39;s Blog</a></li>
+                    
+                        <li><a href="https://uestc-lxy.github.io" target="_blank">UESTC-LXY</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://if-zz.github.io/2016/12/19/scrapy-4/";
+    var disqus_url = "https://if-zz.github.io/2016/12/19/scrapy-4/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
 
     <!-- Footer -->
     <!-- Footer -->
